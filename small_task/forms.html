@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML forms</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <h3>First Name:</h3>
+    <form action="" method="post">
+        <input type="text" name="first-name" maxlength="32" value="" placeholder="First name" />
+
+        <h3>About you:</h3>
+        <textarea name="description" rows="5" cols="60" placeholder="Talk about you..." maxlength="2000"></textarea>
+
+        <h3>Your interest:</h3>
+        <input type="checkbox" name="interest" />Coding
+        <input type="checkbox" name="interest" />Gaming
+
+        <h3>Your Gender:</h3>
+        <input type="radio" name="gender" />Male
+        <input type="radio" name="gender" />Fe-Male
+
+        <h3>Profile Pic:</h3>
+        <input type="file" name="profile-picture" accept="image/png/jpg" />
+
+        <input type="time" name="time" placeholder="HH:MM" />
+        <input type="date" name="date" placeholder="YYYY-MM-DD" />
+        <input type="file" name="file_uploaded" id="file" accept="image/png" />
+
+        <section id="tutorial">
+            <h3>Learn how to do:</h3>
+            <video src="public/coding.mp4" class="tutoVid" width="854" height="480" controls muted autoplay
+                playsinline></video>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/uvgV-tkiJsE?si=zp6VzORdB3wLnflD"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </section>
+
+        <section>
+            <canvas width="200" height="100" style="border: 2px solid black;"></canvas>
+        </section>
+        <button>Submit</button>
+    </form>
+</body>
+
+</html>
