@@ -38,3 +38,16 @@ Create an HTML student registration form with the following fields:
 - **Submit** - Button
 - **Reset** - Button
 
+
+First Name, Last Name: Text input fields
+Gender: Radio buttons
+Phone: Number input field
+Email: Email input field
+Father’s Name: Text input field
+Mother’s Name: Text input field
+Program: Dropdown selection (BCA, BIT, BCE, BBA)
+Interests: Checkboxes (Cyber Security, Data Science, AI)
+About Yourself: Multiline text area
+Hobby: Multiple selection dropdown (singing, dancing, football, chess, etc.)
+Submit: Button
+Reset: Button

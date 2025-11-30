@@ -1,0 +1,28 @@
+body {
+  margin: 40px;
+  text-align: center;
+}
+
+.parent {
+  background-color: tomato;
+  width: 600px;
+  height: 250px;
+
+  border: 10px solid black;
+  border-radius: 8px;
+  padding: 30px;
+  position: relative;
+}
+
+.child {
+  position: absolute;
+  background-color: orange;
+  width: 40%;
+  height: 35%;
+
+  border: 5px solid blue;
+  border-radius: 8px;
+
+  top: 40%;
+  left: 360px;
+}
