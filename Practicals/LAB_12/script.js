@@ -45,7 +45,7 @@ function displayCarInfo(car = MyCar) {
 }
 
 function modifyProperty(el) {
-    let newData = prompt("Enter new information: ");
+    let newData = prompt("Edit information: ", el.textContent);
     if (newData == "" || newData == null) return;
     el.textContent = newData;
     return
