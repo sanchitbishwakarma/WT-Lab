@@ -9,32 +9,35 @@
 </head>
 
 <body>
-    <form onsubmit="validateForm(); return false" class="form-control">
+    <form onsubmit="return validateForm();" class="form-control">
         <h1>Form Validation</h1>
+
         <div class="form-group parents">
             <div>
-                <label data-required="true" class="required">First Name</label>
+                <label data-required="true">First Name</label>
                 <input type="text" id="first-name" placeholder="John" required>
             </div>
 
             <div>
-                <label data-required="true" class="required">Last Name</label>
+                <label data-required="true">Last Name</label>
                 <input type="text" id="last-name" placeholder="Doe" required>
             </div>
         </div>
 
         <div class="form-group">
             <label data-required="true" for="phone-no">Phone No.</label>
-            <input class="form-input" type="tel" id="phone-no" placeholder="+977" required>
+            <input type="tel" id="phone-no" placeholder="1234567890" required>
         </div>
 
         <div class="form-group">
             <label data-required="true" for="email">E-Mail</label>
-            <input class=" form-input" type="email" id="email" placeholder="john.doe@gmail.com" required>
+            <input type="email" id="email" placeholder="john.doe@gmail.com" required>
         </div>
 
         <button type="submit" class="btn">Submit</button>
     </form>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
