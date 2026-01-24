@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <form id="userForm" class="form-control">
+        <h1>Form Validation</h1>
+
+        <div class="form-group parents">
+            <div>
+                <label data-required="true">First Name</label>
+                <input type="text" id="first-name" required>
+            </div>
+
+            <div>
+                <label data-required="true">Last Name</label>
+                <input type="text" id="last-name" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label data-required="true">Phone No.</label>
+            <input type="tel" id="phone-no" required>
+        </div>
+
+        <div class="form-group">
+            <label data-required="true">E-Mail</label>
+            <input type="email" id="email" required>
+        </div>
+
+        <button type="submit" class="btn">Submit</button>
+    </form>
+
+    <script src="script.js" defer></script>
+</body>
+
+</html>
