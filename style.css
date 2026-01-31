@@ -1,40 +1,87 @@
-.tutoVid {
-  border: 10px solid rgb(255, 0, 0);
-  border-radius: 10px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.video-wrapper {
-  position: relative;
-  overflow: hidden;
-  border: 2px solid black;
-  padding: 10px;
-  box-sizing: border-box;
-  border-radius: 6px;
+body {
+  font-family: cursive;
+  line-height: 1.6;
 }
-.video-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: linear-gradient(270deg, #ff4d6d, #00eaff, #000, #ffd700);
-  animation: GradientShift 8s ease infinite;
-  filter: blur(18px) saturate(1.1);
-  opacity: 0.8;
+
+/* Navbar Styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
-.video-wrapper video {
-  position: relative;
-  z-index: 1;
-  object-fit: cover;
-  display: block;
-  background: transparent;
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
 }
-@keyframes GradientShift {
-  0% {
-    background-position: 0% 50%;
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Section Styles */
+.section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 20px 20px;
+  scroll-margin-top: 60px;
+}
+
+.content {
+  text-align: center;
+  max-width: 800px;
+}
+
+.content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.content p {
+  font-size: 1.2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-menu {
+    gap: 1rem;
   }
-  50% {
-    background-position: 100% 50%;
+
+  .nav-link {
+    font-size: 0.9rem;
   }
-  100% {
-    background-position: 0% 50%;
+
+  .content h1 {
+    font-size: 2rem;
+  }
+
+  .content p {
+    font-size: 1rem;
   }
 }

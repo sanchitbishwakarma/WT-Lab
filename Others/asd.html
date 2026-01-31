@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket History</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #36393f;
+            color: #dcddde;
+        }
+
+        .header {
+            background-color: #2f3136;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #ffffff;
+        }
+
+        .info {
+            margin-top: 10px;
+            color: #b9bbbe;
+        }
+
+        .message {
+            background-color: #2f3136;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #5865f2;
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .author {
+            font-weight: bold;
+            color: #ffffff;
+            margin-right: 10px;
+        }
+
+        .timestamp {
+            color: #72767d;
+            font-size: 0.9em;
+        }
+
+        .content {
+            color: #dcddde;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .embed {
+            background-color: #2f3136;
+            border-left: 4px solid #5865f2;
+            padding: 16px;
+            margin-top: 10px;
+            border-radius: 4px;
+            max-width: 520px;
+        }
+
+        .embed-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .embed-author {
+            color: #ffffff;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .embed-title {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .embed-title a {
+            color: #00aff4;
+            text-decoration: none;
+        }
+
+        .embed-title a:hover {
+            text-decoration: underline;
+        }
+
+        .embed-description {
+            color: #dcddde;
+            line-height: 1.375;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-bottom: 8px;
+        }
+
+        .embed-fields {
+            margin-top: 8px;
+        }
+
+        .embed-field {
+            margin-bottom: 8px;
+        }
+
+        .embed-field-name {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .embed-field-value {
+            color: #dcddde;
+            font-size: 14px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .embed-fields-inline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .embed-field-inline {
+            flex: 1;
+            min-width: 150px;
+            max-width: calc(50% - 8px);
+        }
+
+        .embed-image {
+            margin-top: 16px;
+            max-width: 100%;
+            border-radius: 4px;
+        }
+
+        .embed-thumbnail {
+            float: right;
+            margin-left: 16px;
+            margin-bottom: 8px;
+            max-width: 80px;
+            max-height: 80px;
+            border-radius: 4px;
+        }
+
+        .embed-footer {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(79, 84, 92, 0.48);
+            color: #72767d;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .embed-footer-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .attachments {
+            margin-top: 10px;
+        }
+
+        .attachment {
+            margin-top: 8px;
+            display: block;
+            padding: 10px;
+            background-color: #2f3136;
+            border-radius: 4px;
+        }
+
+        .attachment-link {
+            color: #00aff4;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .attachment-link:hover {
+            text-decoration: underline;
+        }
+
+        .attachment-image {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 4px;
+            margin-top: 8px;
+            display: block;
+        }
+
+        .attachment-video {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 4px;
+            margin-top: 8px;
+            display: block;
+        }
+
+        .attachment-audio {
+            width: 100%;
+            max-width: 500px;
+            margin-top: 8px;
+            display: block;
+        }
+
+        .attachment-info {
+            color: #72767d;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        /* Discord Markdown Styles */
+        code {
+            background-color: #202225;
+            color: #dcddde;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background-color: #202225;
+            color: #dcddde;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 8px 0;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            font-size: 0.85em;
+            line-height: 1.5;
+            white-space: pre;
+        }
+
+        strong {
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        em {
+            font-style: italic;
+        }
+
+        u {
+            text-decoration: underline;
+        }
+
+        s {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .spoiler {
+            background-color: #202225;
+            color: #202225;
+            border-radius: 3px;
+            padding: 1px 4px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .spoiler:hover {
+            background-color: #2f3136;
+            color: #dcddde;
+        }
+
+        .spoiler::selection {
+            background-color: transparent;
+        }
+
+        a {
+            color: #00aff4;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .mention {
+            background-color: #5865f2;
+            color: #ffffff;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+
+        .mention.role {
+            background-color: #faa61a;
+        }
+
+        .mention.channel {
+            background-color: #8e9297;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Ticket History</h1>
+        <div class="info">
+            <p><strong>Opened By:</strong> sanchitgamernp</p>
+            <p><strong>Closed By:</strong> verban10</p>
+            <p><strong>Total Messages:</strong> 13</p>
+        </div>
+    </div>
+    <div class="messages">
+
+        <div class="message">
+            <div class="message-header">
+                <span class="author">FakePixel | Support Bot#3467</span>
+                <span class="timestamp">2026-01-29 15:22:47</span>
+            </div>
+            <div class="content"><em>No text</em></div>
+            <div class="embed" style="border-left-color: #3498db;">
+                <div class="embed-title">🎫 Ticket Information</div>
+                <div class="embed-description">&lt;strong&gt;Your ticket has been successfully created!&lt;/strong&gt;
+                    Below is the information you provided:</div>
+                <div class="embed-fields-inline">
+                    <div class="embed-field embed-field-inline">
+                        <div class="embed-field-name">🌐 Language</div>
+                        <div class="embed-field-value">&lt;strong&gt;CODEBLOCK0&lt;/strong&gt;</div>
+                    </div>
+                    <div class="embed-field embed-field-inline">
+                        <div class="embed-field-name">👤 Nickname</div>
+                        <div class="embed-field-value">&lt;strong&gt;CODEBLOCK0&lt;/strong&gt;</div>
+                    </div>
+                    <div class="embed-field">
+                        <div class="embed-field-name">📝 Reason for Contact</div>
+                        <div class="embed-field-value">&lt;strong&gt;CODEBLOCK0&lt;/strong&gt;</div>
+                    </div>
+                </div>
+                <div class="embed-footer">
+                    <img src="https://cdn.discordapp.com/avatars/850779916306874421/41f459206e1a001c6e84b74c0e1279af.png?size=1024"
+                        class="embed-footer-icon" alt="Footer icon" />
+                    <span>Created by: sanchitgamernp</span>
+                    <span style="margin-left: 8px;">• 2026-01-29 15:22:48</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="message">
+            <div class="message-header">
+                <span class="author">FakePixel | Support Bot#3467</span>
+                <span class="timestamp">2026-01-29 15:22:47</span>
+            </div>
+            <div class="content"><em>No text</em></div>
+            <div class="embed" style="border-left-color: #e67e22;">
+                <div class="embed-description">⏳ Our support team will help you with your issue soon</div>
+            </div>
+        </div>
+
+        <div class="message">
+            <div class="message-header">
+                <span class="author">FakePixel | Support Bot#3467</span>
+                <span class="timestamp">2026-01-29 15:22:52</span>
+            </div>
+            <div class="content"><span class="mention">@User 850779916306874421</span></div>
+            <div class="embed" style="border-left-color: #3498db;">
+                <div class="embed-title">📋 Problem Description</div>
+                <div class="embed-description">Please describe your problem &lt;strong&gt;IN MAXIMUM
+                    DETAIL&lt;/strong&gt;.<br><br>After that, our staff will help you! 💙</div>
+            </div>
+        </div>
+
+        <div class="message">
+            <div class="message-header">
+                <span class="author">sanchitgamernp</span>
+                <span class="timestamp">2026-01-29 15:23:38</span>
+            </div>
+            <div class="content">I was trying to join and got this at time: &lt;t:1769700180:F&gt;</div>
+            <div class="attachments">
+                <div class="attachment">
+                    <a href="https://cdn.discordapp.com/attachments/1466453529978867743/1466453745771745301/image.png?ex=697d75ba&amp;is=697c243a&amp;hm=ca3794067defcba35507dfd91126b8b8d68f4bc2b1b67a4e05be55043256de72&amp;"
+                        class="attachment-link" target="_blank">📎 image.png</a>
+                    <img src="https://cdn.discordapp.com/attachments/1466453529978867743/1466453745771745301/image.png?ex=697d75ba&amp;is=697c243a&amp;hm=ca3794067defcba35507dfd91126b8b8d68f4bc2b1b67a4e05be55043256de72&amp;"
+                        alt="image.png" class="attachment-image" />
+                    <div class="attachment-info">Size: 13.36 KB</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="message">
+            <div class="message-header">
+                <span class="author">sanchitgamernp</span>
+                <span class="timestamp">2026-01-29 15:26:43</span>
+            </div>
+            <div class="content">I can&#x27;t show in game proof becuase I got banned. but other person can check my
+                profile and see the discord id linked with it.<br>In game username:
+                &lt;strong&gt;INLINECODE0&lt;/strong&gt;</div>
+        </div>
+
+        <div class="message">
+            <div class="message-header">
+                <span class="author">sanchitgamernp</span>
+                <span class="timestamp">2026-01-29 15:35:05</span>
+            </div>
+            <div class="content">I have my youtube video as proof of the account is mine. <br>Link: <a
+                    href="https://www.you" target="_blank"
+                    rel="noopener noreferrer">https://www.you</a>tube.com/shorts/4-NcmV0DBos</div>
+            <div class="embed" style="border-left-color: #ff0000;">
+                <div class="embed-header">
+                    <a href="https://www.youtube.com/channel/UC15UmZc5uOKZCXhsKqe1Naw" class="embed-author"
+                        target="_blank">SanchitGamerNP</a>
+                </div>
+                <img src="https://i.ytimg.com/vi/4-NcmV0DBos/maxresdefault.jpg" class="embed-thumbnail"
+                    alt="Thumbnail" />
+                <div class="embed-title"><a href="https://www.youtube.com/watch?v=4-NcmV0DBos" target="_blank">Fakepixel
+                        Server is the BEST Minecraft Server for Skyblock Enthusia...</a></div>
+                <div class="embed-description">Fakepixel Server is the BEST Minecraft Server for Skyblock Enthusiasts
+                    #skyblock #sanchitgamernp <br><br>--- s o c i a l s ---<br>🔴Techila Channel: <a
+                        href="https://www.you" target="_blank"
+                        rel="noopener noreferrer">https://www.you</a>tube.com/@JobLessGod<br>📸Instagram: <a
+                        href="https://ins" target="_blank"
+                        rel="noopener noreferrer">https://ins</a>tagram.com/sanchitgamernp<br>🔷Discord: <a
+                        href="https://discord." target="_blank"
+                        rel="noopener noreferrer">https://discord.</a>gg/qhmEgJMmQP <br>🐔Twitter: <a
+                        href="https://www." target="_blank"
+                        rel="noopener noreferrer">https://www.</a>twitter.com/sanchitgamernp<br>- - -<br><br>I hope you
+                    en...</div>
+            </div>
+        </div>
+
+        <div class="message">
+            <div class="message-header">
+                <span class="author">verban10</span>
+                <span class="timestamp">2026-01-29 21:21:25</span>
+            </div>
+            <div class="content">Hello, <span class="mention">@User 850779916306874421</span> !</div>
+        </div>
+
+        <div class="message">
+            <div class="message-header">
+                <span class="author">verban10</span>
+                <span class="timestamp">2026-01-29 21:21:27</span>
+            </div>
+            <div class="content">You are not banned from the server. Only the IP address you are connecting from is
+                banned. If you are using a VPN, please turn it off and try again.</div>
+        </div>
+
+        <div class="message">
+            <div class="message-header">
+                <span class="author">sanchitgamernp</span>
+                <span class="timestamp">2026-01-30 09:14:04</span>
+            </div>
+            <div class="content">Thank you sir for informing that but how this happen. I think another fakepixel player
+                stays around my location.</div>
+        </div>
+
+        <div class="message">
+            <div class="message-header">
+                <span class="author">sanchitgamernp</span>
+                <span class="timestamp">2026-01-30 09:18:22</span>
+            </div>
+            <div class="content">I confirm that I wasn&#x27;t ban.</div>
+            <div class="attachments">
+                <div class="attachment">
+                    <a href="https://cdn.discordapp.com/attachments/1466453529978867743/1466724210104864903/image.png?ex=697dc8de&amp;is=697c775e&amp;hm=0b0d2e0b2c9238b8655873baa02b6d3ff813925c224cadb34a58494f37ceca77&amp;"
+                        class="attachment-link" target="_blank">📎 image.png</a>
+                    <img src="https://cdn.discordapp.com/attachments/1466453529978867743/1466724210104864903/image.png?ex=697dc8de&amp;is=697c775e&amp;hm=0b0d2e0b2c9238b8655873baa02b6d3ff813925c224cadb34a58494f37ceca77&amp;"
+                        alt="image.png" class="attachment-image" />
+                    <div class="attachment-info">Size: 210.93 KB</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="message">
+            <div class="message-header">
+                <span class="author">sanchitgamernp</span>
+                <span class="timestamp">2026-01-30 09:18:55</span>
+            </div>
+            <div class="content">But how am I gonna play, if someone got banned from same my address.</div>
+        </div>
+
+        <div class="message">
+            <div class="message-header">
+                <span class="author">verban10</span>
+                <span class="timestamp">2026-01-30 10:19:01</span>
+            </div>
+            <div class="content">If that&#x27;s the case, you can try using vpn</div>
+        </div>
+
+        <div class="message">
+            <div class="message-header">
+                <span class="author">sanchitgamernp</span>
+                <span class="timestamp">2026-01-30 11:17:04</span>
+            </div>
+            <div class="content">I&#x27;ll try not to use vpn, let&#x27;s see what happens in future. I am done with the
+                ticket support. It was great to talk with you. You can close the ticket for me. Thank You.</div>
+        </div>
+    </div>
+</body>
+
+</html>
