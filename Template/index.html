@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smooth Navigation - No URL Change</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo">Smooth Animation</div>
+        <ul class="nav-menu">
+          <li><a href="#home" class="nav-link" data-section="home">Home</a></li>
+          <li>
+            <a href="#about" class="nav-link" data-section="about">About</a>
+          </li>
+          <li>
+            <a href="#services" class="nav-link" data-section="services"
+              >Services</a
+            >
+          </li>
+          <li>
+            <a href="#portfolio" class="nav-link" data-section="portfolio"
+              >Portfolio</a
+            >
+          </li>
+          <li>
+            <a href="#contact" class="nav-link" data-section="contact"
+              >Contact</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Sections -->
+    <section id="home" class="section">
+      <div class="content">
+        <h1>Home Section</h1>
+        <p>
+          Welcome to the home section. Scroll down or use the navigation menu.
+        </p>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="content">
+        <h1>About Section</h1>
+        <p>This is the about section with information about us.</p>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="content">
+        <h1>Services Section</h1>
+        <p>Check out our amazing services here.</p>
+      </div>
+    </section>
+
+    <section id="portfolio" class="section">
+      <div class="content">
+        <h1>Portfolio Section</h1>
+        <p>Browse through our portfolio of work.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="content">
+        <h1>Contact Section</h1>
+        <p>Get in touch with us through this section.</p>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        if ("scrollRestoration" in history) {
+          history.scrollRestoration = "manual";
+        }
+
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 0);
+
+        if (window.location.hash) {
+          history.replaceState(null, "", window.location.pathname);
+        }
+
+        document.querySelectorAll("a[data-section]").forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            const id = link.dataset.section;
+            const section = document.getElementById(id);
+
+            if (!section) return;
+
+            section.scrollIntoView({
+              behavior: "smooth",
+            });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
