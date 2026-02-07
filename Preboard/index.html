@@ -18,6 +18,7 @@
             padding: 8px;
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -31,23 +32,24 @@
     </form>
 </body>
 <script>
+    /**
+     * @param {number} marks - Student marks (0-100)
+     * @returns {string} Grade letter (A, B, C, D, or F)
+     */
     function getGrade(marks) {
-        switch (true) {
-            case (marks < 100 && marks >= 90): return "A";
-            case (marks >= 80): return "B";
-            case (marks >= 70): return "C";
-            case (marks >= 60): return "D";
-            default: return "F (Fail)";
-        }
+        if (marks >= 90 && marks < 100) return "A";
+        if (marks >= 80) return "B";
+        if (marks >= 70) return "C";
+        if (marks >= 60) return "D";
+        return "F (Fail)";
     }
 
     function getResult() {
-        let marks = document.getElementById("marksInput").value;
-        let resElement = document.getElementById("result");
+        let marks = $("#marksInput").val();
 
         if (marks > 100 || marks < 0) return alert("Please enter value between 0 to 100 only.")
 
-        resElement.innerHTML = "Grade " + getGrade(marks);
+        $("#result").html("Grade " + getGrade(marks));
         return false;
     }
 </script>
