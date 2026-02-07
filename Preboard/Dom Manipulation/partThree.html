@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Toggle</title>
+    <style>
+        .highlight {
+            background-color: rgb(255, 64, 0);
+            padding: 10px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <p id="text">Watch my style change</p>
+    <button id="toggleBtn">Toggle Style</button>
+
+    <script>
+        const text = document.getElementById("text");
+        const toggleBtn = document.getElementById("toggleBtn");
+
+        toggleBtn.addEventListener("click", () => {
+            text.classList.toggle("highlight")
+        })
+    </script>
+</body>
+
+</html>
