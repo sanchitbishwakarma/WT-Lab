@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Playlist Outro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .done {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>You Made It 🎉</h1>
+    <p id="status">Click the button to finish</p>
+    <button id="finishBtn">Finish Playlist</button>
+
+    <script>
+        const status = document.getElementById("status");
+        const finishBtn = document.getElementById("finishBtn");
+
+        finishBtn.addEventListener("click", () => {
+            status.textContent = "You now know the DOM basics!";
+            status.classList.add("done");
+            finishBtn.disabled = true;
+        });
+    </script>
+</body>
+
+</html>

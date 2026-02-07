@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Events</title>
+</head>
+
+<body>
+    <h2>Type something</h2>
+    <p id="keyOutput"></p>
+
+    <script>
+        const keyOutput = document.getElementById("keyOutput");
+
+        document.addEventListener("keydown", (event) => {
+            keyOutput.textContent = "You pressed: " + event.key;
+        })
+    </script>
+</body>
+
+</html>

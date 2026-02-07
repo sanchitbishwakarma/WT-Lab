@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I dare you 😏</title>
+</head>
+
+<body>
+    <h2>Try pressing Ctrl + R</h2>
+    <p id="keyOutput"></p>
+    <p id="message">I dare you 😏</p>
+
+    <script>
+        const message = document.getElementById("message");
+        const keyOutput = document.getElementById("keyOutput");
+
+        document.addEventListener("keydown", (event) => {
+            keyOutput.textContent = "You pressed: " + event.key;
+        })
+
+        document.addEventListener("keydown", (e) => {
+            if (e.ctrlKey && e.key == "r") {
+                e.preventDefault();
+                message.textContent = "Nice try 😎 Refresh denied!"
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>
