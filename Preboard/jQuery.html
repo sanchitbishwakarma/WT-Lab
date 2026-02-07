@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+    <style>
+        #box {
+            width: 150px;
+            height: 100px;
+            background: lightgray;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn">Click Me</button>
+    <p id="text">hello jquery</p>
+    <div id="box"></div>
+
+    <script>
+        let button = document.getElementById("#btn");
+        $("#btn").click(function () {
+            let txt = $("#text").text();
+            txt = txt.toUpperCase();
+
+            $("#text").text(txt);
+            $("#box").css("background", "blue");
+        })
+    </script>
+</body>
+
+</html>
