@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Events</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            background-color: lightgray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">Hover over me</div>
+    <p id="message"></p>
+
+    <script>
+        const box = document.getElementById("box");
+        const message = document.getElementById("message");
+
+        box.addEventListener("mouseover", () => {
+            box.textContent = "Mouse is inside the box!";
+            box.style.backgroundColor = "lightblue";
+        })
+
+        box.addEventListener("mouseleave", () => {
+            box.textContent = "Mouse left the box!";
+            box.style.backgroundColor = "lightgray";
+        })
+    </script>
+</body>
+
+</html>
